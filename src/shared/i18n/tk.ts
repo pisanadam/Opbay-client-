@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': 'Ýokarda berkit',
   'Sabitlemeyi kaldır': 'Berkitmegi aýyr',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': 'Bu enjamda {total} GB bar; şonçany oýna berseňiz ulgama ýetjegi galmaýar.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': 'Bu wersiýa üçin az; ýat ýetmezçiliginden oýun ýykylyp biler.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': '{count} mod üçin az; ýat ýetmezçiliginden oýun ýykylyp biler.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Mod ýok, şonçasy gerek däl. Gerekden köp ýat zibil ýygnaýjyny haýalladýar we FPS düşýär.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '{count} mod üçin gerekden köp. Gerekden köp ýat zibil ýygnaýjyny haýalladýar we FPS düşýär.',
-  'Mod yok; bu ayar uygun.': 'Mod ýok; bu sazlama laýyk.',
-  '{count} mod için uygun.': '{count} mod üçin laýyk.',
   '{size} GB yap': '{size} GB et',
   'İstatistikler': 'Statistika',
   'Ne kadar ve ne zaman oynadığınız': 'Näçe we haçan oýnanyňyz',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': 'Iş stoly gysga ýoly',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': 'Iki gezek basanyňyzda launcher açylyp şu profili başladýar',
   'Masaüstüne ekle': 'Iş stoluna goş',
-  'Kısayol oluşturuldu: {file}': 'Gysga ýol döredildi: {file}'
+  'Kısayol oluşturuldu: {file}': 'Gysga ýol döredildi: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': 'Bu profil üçin az görünýär; ýat ýetmezçiliginden oýun ýykylyp biler.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': 'Oýun özüne berlen ýadyň ählisini ulandy; bu sazlama az görünýär.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': 'Oýun soňky sessiýalarda {peak} GB ulandy; bu sazlama oňa ýetmeýär.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Bu profil üçin köp görünýär. Gerekden köp ýat zibil ýygnaýjyny haýalladýar we FPS düşýär.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Oýun soňky sessiýalarda iň köp {peak} GB ulandy. Gerekden köp ýat zibil ýygnaýjyny haýalladýar we FPS düşýär.',
+  'Bu profil için uygun görünüyor.': 'Bu profil üçin laýyk görünýär.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': 'Oýun soňky sessiýalarda iň köp {peak} GB ulandy; bu sazlama laýyk.'
 }
 
 export default table

@@ -15,7 +15,7 @@ import { OptionsEditor } from '../components/OptionsEditor'
 import { ProfileIcon } from '../components/ProfileIcon'
 import { ScreenshotGallery, type GalleryItem } from '../components/ScreenshotGallery'
 import { ServersTab } from '../components/ServersTab'
-import { memoryAdvice } from '../../shared/memoryAdvice'
+import { memoryAdvice, type MeasuredSession } from '../../shared/memoryAdvice'
 import { parseOptions, readOption } from '../../shared/options'
 import { Confirm, Modal } from '../components/Modal'
 import type { AutoWorldBackupSummary, JavaInfo, WorldSummary } from '../../preload'
@@ -1173,21 +1173,45 @@ function ProfileSettingsTab({
   const [canShortcut, setCanShortcut] = useState(false)
   const [shortcutBusy, setShortcutBusy] = useState(false)
 
+  /** Weight of the mods folder, and what the game was measured using. */
+  const [modBytes, setModBytes] = useState(0)
+  const [measured, setMeasured] = useState<MeasuredSession[]>([])
+
   /**
-   * What this profile's memory ought to be, given what is in it.
+   * What this profile's memory ought to be.
    *
-   * Only enabled mods count: a jar renamed to `.disabled` is not loaded, so it
-   * costs nothing and should not push the recommendation up.
+   * Both inputs are about this profile specifically: what its mods weigh, and —
+   * once it has been played — how much the game actually held. A mod count
+   * would say the same thing about ninety-six small tweaks and ninety-six heavy
+   * content mods.
    */
   const advice = memoryAdvice({
     currentMb: memory,
-    modCount: profile.content.filter((entry) => entry.kind === 'mod' && entry.enabled).length,
-    totalMb: totalMemory ?? undefined
+    modBytes,
+    totalMb: totalMemory ?? undefined,
+    sessions: measured
   })
 
   useEffect(() => {
     void api.app.totalMemoryMb().then(setTotalMemory).catch(() => undefined)
     void api.profiles.canCreateShortcut().then(setCanShortcut).catch(() => undefined)
+    void api.profiles
+      .storage(profileId)
+      .then((report) => setModBytes(report.entries.find((entry) => entry.category === 'mods')?.bytes ?? 0))
+      .catch(() => undefined)
+    void api.stats
+      .sessions()
+      .then((all) => {
+        const mine = all.find((entry) => entry.profileId === profileId)?.sessions ?? []
+        setMeasured(
+          mine.flatMap((session) =>
+            // Both numbers or neither: a peak without the limit it ran under
+            // cannot be read at all.
+            session.peakMb && session.capMb ? [{ peakMb: session.peakMb, capMb: session.capMb }] : []
+          )
+        )
+      })
+      .catch(() => undefined)
   }, [])
 
   const managedCount = Object.keys(profile.managedOptions ?? {}).length

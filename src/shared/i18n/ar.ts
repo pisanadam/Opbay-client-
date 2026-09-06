@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': 'تثبيت في الأعلى',
   'Sabitlemeyi kaldır': 'إلغاء التثبيت',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': 'هذا الجهاز فيه {total} غيغابايت؛ إعطاء هذا القدر للعبة لا يترك للنظام ما يكفي.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': 'قليل لهذه النسخة؛ قد تنهار اللعبة لنقص الذاكرة.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': 'قليل لـ {count} إضافة؛ قد تنهار اللعبة لنقص الذاكرة.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'لا إضافات، وهذا القدر زائد. الذاكرة الزائدة عن الحاجة تُبطئ جامع المهملات وتخفض الإطارات.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'أكثر مما تحتاجه {count} إضافة. الذاكرة الزائدة عن الحاجة تُبطئ جامع المهملات وتخفض الإطارات.',
-  'Mod yok; bu ayar uygun.': 'لا إضافات؛ هذا الضبط مناسب.',
-  '{count} mod için uygun.': 'مناسب لـ {count} إضافة.',
   '{size} GB yap': 'اجعلها {size} غيغابايت',
   'İstatistikler': 'الإحصاءات',
   'Ne kadar ve ne zaman oynadığınız': 'كم تلعب ومتى',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': 'اختصار على سطح المكتب',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': 'النقر المزدوج يفتح المشغّل ويشغّل هذا الملف الشخصي',
   'Masaüstüne ekle': 'أضف إلى سطح المكتب',
-  'Kısayol oluşturuldu: {file}': 'أُنشئ الاختصار: {file}'
+  'Kısayol oluşturuldu: {file}': 'أُنشئ الاختصار: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': 'يبدو قليلًا لهذا الملف الشخصي؛ قد تنهار اللعبة لنقص الذاكرة.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': 'استهلكت اللعبة كل ما مُنح لها؛ يبدو هذا الضبط قليلًا.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': 'استخدمت اللعبة {peak} غيغابايت في الجلسات الأخيرة؛ هذا الضبط لا يكفيها.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'يبدو كثيرًا لهذا الملف الشخصي. الذاكرة الزائدة عن الحاجة تُبطئ جامع المهملات وتخفض الإطارات.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'استخدمت اللعبة {peak} غيغابايت على الأكثر في الجلسات الأخيرة. الذاكرة الزائدة عن الحاجة تُبطئ جامع المهملات وتخفض الإطارات.',
+  'Bu profil için uygun görünüyor.': 'يبدو مناسبًا لهذا الملف الشخصي.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': 'استخدمت اللعبة {peak} غيغابايت على الأكثر في الجلسات الأخيرة؛ هذا الضبط مناسب.'
 }
 
 export default table

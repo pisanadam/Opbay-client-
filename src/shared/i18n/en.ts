@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': 'Pin to the top',
   'Sabitlemeyi kaldır': 'Unpin',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': 'This machine has {total} GB; giving that much to the game leaves too little for the system.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': 'Low for this version; the game may crash for want of memory.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': 'Low for {count} mods; the game may crash for want of memory.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'No mods; this much is unnecessary. More memory than needed slows the garbage collector and costs FPS.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'More than {count} mods need. More memory than needed slows the garbage collector and costs FPS.',
-  'Mod yok; bu ayar uygun.': 'No mods; this setting is fine.',
-  '{count} mod için uygun.': 'Right for {count} mods.',
   '{size} GB yap': 'Set {size} GB',
   'İstatistikler': 'Statistics',
   'Ne kadar ve ne zaman oynadığınız': 'How much you play, and when',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': 'Desktop shortcut',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': 'Double-clicking it opens the launcher and starts this profile',
   'Masaüstüne ekle': 'Add to desktop',
-  'Kısayol oluşturuldu: {file}': 'Shortcut created: {file}'
+  'Kısayol oluşturuldu: {file}': 'Shortcut created: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': 'Looks low for this profile; the game may crash for want of memory.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': 'The game used every megabyte it was given; this setting looks low.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': 'The game used {peak} GB in recent sessions; this setting is not enough for it.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Looks high for this profile. More memory than needed slows the garbage collector and costs FPS.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'The game used at most {peak} GB in recent sessions. More memory than needed slows the garbage collector and costs FPS.',
+  'Bu profil için uygun görünüyor.': 'Looks right for this profile.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': 'The game used at most {peak} GB in recent sessions; this setting is fine.'
 }
 
 export default table

@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': '固定在顶部',
   'Sabitlemeyi kaldır': '取消固定',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': '这台机器有 {total} GB；给游戏这么多，留给系统的就不够了。',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': '对这个版本来说偏少，游戏可能因内存不足而崩溃。',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': '对 {count} 个模组来说偏少，游戏可能因内存不足而崩溃。',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '没有模组，这么多用不上。内存超出所需会拖慢垃圾回收，掉帧。',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '超过 {count} 个模组所需。内存超出所需会拖慢垃圾回收，掉帧。',
-  'Mod yok; bu ayar uygun.': '没有模组，这个设置合适。',
-  '{count} mod için uygun.': '适合 {count} 个模组。',
   '{size} GB yap': '设为 {size} GB',
   'İstatistikler': '统计',
   'Ne kadar ve ne zaman oynadığınız': '你玩了多久，什么时候玩的',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': '桌面快捷方式',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': '双击即可打开启动器并直接启动这个配置',
   'Masaüstüne ekle': '添加到桌面',
-  'Kısayol oluşturuldu: {file}': '已创建快捷方式：{file}'
+  'Kısayol oluşturuldu: {file}': '已创建快捷方式：{file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': '对这个配置来说偏少，游戏可能因内存不足而崩溃。',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': '游戏把分给它的内存全用完了，这个设置看起来偏少。',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': '最近几次游戏用了 {peak} GB，这个设置不够。',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '对这个配置来说偏多。内存超出所需会拖慢垃圾回收，掉帧。',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '最近几次游戏最多用了 {peak} GB。内存超出所需会拖慢垃圾回收，掉帧。',
+  'Bu profil için uygun görünüyor.': '对这个配置来说合适。',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': '最近几次游戏最多用了 {peak} GB，这个设置合适。'
 }
 
 export default table

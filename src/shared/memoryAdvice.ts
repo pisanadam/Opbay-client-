@@ -4,16 +4,20 @@
  * Everyone's first instinct is to give Minecraft as much as the machine has,
  * and it is the wrong instinct: the Java garbage collector has to walk what it
  * was given, so a heap far larger than the game needs turns short, unnoticeable
- * pauses into long ones. A 12 GB heap on a profile that uses three is measurably
- * choppier than a 4 GB one, which is exactly the opposite of what the person
- * dragging the slider expects.
+ * pauses into long ones. The other direction is worse but at least it announces
+ * itself — too little memory and the game crashes with OutOfMemoryError.
  *
- * The other direction is worse but at least it announces itself: too little
- * memory and the game crashes with OutOfMemoryError.
+ * The hard part is knowing what "needs" means for a particular profile. Counting
+ * mods does not answer it: ninety-six small utility mods and ninety-six heavy
+ * ones are not the same pack, and the number is the same. Nothing on disk answers
+ * it reliably either — a mod's jar can be large because of textures and cost
+ * almost nothing at runtime.
  *
- * So the launcher has an opinion. It does not enforce it — someone who knows
- * their pack needs 10 GB should be able to say so — it just says what it would
- * have picked and why.
+ * So the launcher stops guessing as soon as it can. Every session records the
+ * most memory the game actually held, and from the second launch onwards the
+ * advice is a measurement of this pack on this machine. Until then it falls back
+ * to what the profile weighs on disk, which is a rough signal and is described
+ * as one.
  */
 
 export interface MemoryAdvice {
@@ -31,21 +35,36 @@ export interface MemoryAdvice {
    */
   reason: string
   reasonParams: Record<string, string | number>
+  /** Whether the advice rests on measured sessions or on a guess. */
+  basis: 'measured' | 'estimated'
 }
 
 /** Vanilla runs comfortably here; every step above is about mods. */
 const BASE_MB = 2048
 
 /**
- * Mods cost memory in two ways: the jars themselves, and the world data the
- * bigger ones keep in memory. These steps come from what the common packs
- * actually need rather than from a formula.
+ * Headroom over what the game was seen to use.
+ *
+ * A heap sized to the exact high-water mark collects constantly. Half again,
+ * plus a fixed cushion, is enough that a heavier world than the one measured
+ * does not immediately run out.
  */
-function forModCount(modCount: number): number {
-  if (modCount === 0) return BASE_MB
-  if (modCount <= 20) return 3072
-  if (modCount <= 60) return 4096
-  if (modCount <= 120) return 6144
+const HEADROOM = 1.5
+const CUSHION_MB = 768
+
+/**
+ * Weight on disk, as a stand-in until there is a measurement.
+ *
+ * Chosen over a mod count because it at least notices the difference between a
+ * folder of small tweaks and one full of large content mods. It is still only a
+ * proxy, and the advice says so.
+ */
+function fromDiskSize(modBytes: number): number {
+  const megabytes = modBytes / 1_048_576
+  if (megabytes < 1) return BASE_MB
+  if (megabytes <= 50) return 3072
+  if (megabytes <= 200) return 4096
+  if (megabytes <= 500) return 6144
   return 8192
 }
 
@@ -54,27 +73,74 @@ function toStep(megabytes: number): number {
   return Math.round(megabytes / 512) * 512
 }
 
+/** How close to its limit a session has to get before the peak stops meaning "enough". */
+const PRESSED = 0.8
+
+export interface MeasuredSession {
+  peakMb: number
+  /** The heap limit it ran under. */
+  capMb: number
+}
+
 export function memoryAdvice(input: {
   currentMb: number
-  modCount: number
+  /** Total size of the profile's mods on disk, in bytes. */
+  modBytes: number
   /** The machine's total RAM, when it is known. */
   totalMb?: number
+  /** Recent sessions of this profile that were measured. */
+  sessions?: MeasuredSession[]
 }): MemoryAdvice {
-  const { currentMb, modCount, totalMb } = input
-  const wanted = forModCount(modCount)
+  const { currentMb, modBytes, totalMb, sessions = [] } = input
+
+  const usable = sessions.filter(
+    (session) =>
+      Number.isFinite(session.peakMb) &&
+      Number.isFinite(session.capMb) &&
+      session.peakMb > 0 &&
+      session.capMb > 0
+  )
+
+  // Sessions that finished with room to spare: the JVM could have taken more
+  // and did not, so the peak is what the pack wanted.
+  const settled = usable.filter((session) => session.peakMb < session.capMb * PRESSED)
+  // Sessions that ran up against their limit say only "at least this much".
+  const pressed = usable.filter((session) => session.peakMb >= session.capMb * PRESSED)
+
+  const estimate = fromDiskSize(modBytes)
+  const observedPeak = settled.length > 0 ? Math.max(...settled.map((session) => session.peakMb)) : null
+
+  let wanted: number
+  let basis: MemoryAdvice['basis']
+  if (observedPeak !== null) {
+    wanted = Math.max(BASE_MB, toStep(observedPeak * HEADROOM + CUSHION_MB))
+    basis = 'measured'
+  } else if (pressed.length > 0) {
+    // It used everything it was given, every time. That is not a measurement of
+    // what it needs, only a floor under it — so the estimate is raised to sit
+    // above the limit it kept hitting rather than replaced by it.
+    const highestCap = Math.max(...pressed.map((session) => session.capMb))
+    wanted = Math.max(estimate, toStep(highestCap + 1024))
+    basis = 'measured'
+  } else {
+    wanted = estimate
+    basis = 'estimated'
+  }
 
   // Never advise more than half the machine: the rest of the system, and
   // Minecraft's own non-heap memory, have to live in what is left.
   const ceiling = totalMb ? Math.max(2048, toStep(totalMb / 2)) : Number.POSITIVE_INFINITY
   const recommendedMb = toStep(Math.min(wanted, ceiling))
 
-  const params = { count: modCount }
+  const asGb = (megabytes: number): number => Number((megabytes / 1024).toFixed(1))
+  const peakParams = { peak: asGb(observedPeak ?? 0) }
 
   // Leaving the system under 2 GB is the one that makes the whole computer
   // unusable rather than just the game, so it is checked first.
   if (totalMb && totalMb - currentMb < 2048) {
     return {
       recommendedMb,
+      basis,
       warning: 'starves-system',
       reason: 'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.',
       reasonParams: { total: Math.round(totalMb / 1024) }
@@ -82,14 +148,24 @@ export function memoryAdvice(input: {
   }
 
   if (currentMb < wanted - 512) {
+    if (observedPeak !== null) {
+      return {
+        recommendedMb,
+        basis,
+        warning: 'too-low',
+        reason: 'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.',
+        reasonParams: peakParams
+      }
+    }
     return {
       recommendedMb,
+      basis,
       warning: 'too-low',
       reason:
-        modCount === 0
-          ? 'Bu sürüm için az; oyun bellek yetmediği için çökebilir.'
-          : '{count} mod için az; oyun bellek yetmediği için çökebilir.',
-      reasonParams: params
+        pressed.length > 0
+          ? 'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.'
+          : 'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.',
+      reasonParams: {}
     }
   }
 
@@ -98,18 +174,23 @@ export function memoryAdvice(input: {
   if (currentMb > recommendedMb + 2048) {
     return {
       recommendedMb,
+      basis,
       warning: 'too-high',
       reason:
-        modCount === 0
-          ? 'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.'
-          : '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.',
-      reasonParams: params
+        observedPeak === null
+          ? 'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.'
+          : 'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.',
+      reasonParams: peakParams
     }
   }
 
   return {
     recommendedMb,
-    reason: modCount === 0 ? 'Mod yok; bu ayar uygun.' : '{count} mod için uygun.',
-    reasonParams: params
+    basis,
+    reason:
+      observedPeak === null
+        ? 'Bu profil için uygun görünüyor.'
+        : 'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.',
+    reasonParams: peakParams
   }
 }

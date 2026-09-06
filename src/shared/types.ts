@@ -225,6 +225,23 @@ export interface PlaySession {
   at: number
   /** How long it lasted, in milliseconds. */
   ms: number
+  /**
+   * The most memory the game held during it, in MB.
+   *
+   * Absent on sessions recorded before this was measured, and on platforms that
+   * will not report it — which is why the memory advice treats it as evidence
+   * when it exists rather than as a value it can count on.
+   */
+  peakMb?: number
+  /**
+   * The heap limit the session ran under, in MB.
+   *
+   * Recorded with the peak because the peak means nothing without it: a game
+   * that reached 1.9 GB under a 2 GB limit may have wanted far more and simply
+   * had nowhere to go, while one that reached 1.9 GB with 14 GB available had
+   * every chance to take more and did not. Only the second is evidence.
+   */
+  capMb?: number
 }
 
 export type ProfileHistoryKind =

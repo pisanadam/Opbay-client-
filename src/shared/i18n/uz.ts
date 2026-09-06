@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': 'Yuqorida mahkamlash',
   'Sabitlemeyi kaldır': 'Mahkamlashni olib tashlash',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': 'Bu kompyuterda {total} GB bor; shuncha xotirani oʻyinga bersangiz tizimga yetarli qolmaydi.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': 'Bu versiya uchun kam; xotira yetmagani uchun oʻyin qulashi mumkin.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': '{count} ta mod uchun kam; xotira yetmagani uchun oʻyin qulashi mumkin.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Mod yoʻq, buncha xotira kerak emas. Keragidan ortiq xotira axlat yigʻuvchini sekinlashtiradi va FPS tushadi.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '{count} ta mod uchun keragidan koʻp. Keragidan ortiq xotira axlat yigʻuvchini sekinlashtiradi va FPS tushadi.',
-  'Mod yok; bu ayar uygun.': 'Mod yoʻq; bu sozlama mos.',
-  '{count} mod için uygun.': '{count} ta mod uchun mos.',
   '{size} GB yap': '{size} GB qilish',
   'İstatistikler': 'Statistika',
   'Ne kadar ve ne zaman oynadığınız': 'Qancha va qachon oʻynaganingiz',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': 'Ish stoli yorligʻi',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': 'Ikki marta bosilganda launcher ochilib shu profilni ishga tushiradi',
   'Masaüstüne ekle': 'Ish stoliga qoʻshish',
-  'Kısayol oluşturuldu: {file}': 'Yorliq yaratildi: {file}'
+  'Kısayol oluşturuldu: {file}': 'Yorliq yaratildi: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': 'Bu profil uchun kam koʻrinadi; xotira yetmagani uchun oʻyin qulashi mumkin.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': 'Oʻyin oʻziga berilgan xotiraning hammasini ishlatdi; bu sozlama kam koʻrinadi.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': 'Oʻyin soʻnggi sessiyalarda {peak} GB ishlatdi; bu sozlama unga yetmaydi.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Bu profil uchun koʻp koʻrinadi. Keragidan ortiq xotira axlat yigʻuvchini sekinlashtiradi va FPS tushadi.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Oʻyin soʻnggi sessiyalarda koʻpi bilan {peak} GB ishlatdi. Keragidan ortiq xotira axlat yigʻuvchini sekinlashtiradi va FPS tushadi.',
+  'Bu profil için uygun görünüyor.': 'Bu profil uchun mos koʻrinadi.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': 'Oʻyin soʻnggi sessiyalarda koʻpi bilan {peak} GB ishlatdi; bu sozlama mos.'
 }
 
 export default table

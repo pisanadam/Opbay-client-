@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': 'Жогоруда бекитүү',
   'Sabitlemeyi kaldır': 'Бекитүүнү алуу',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': 'Бул компьютерде {total} ГБ бар; ушунча оюнга берилсе системага жетери калбайт.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': 'Бул версия үчүн аз; эстутум жетпей оюн кулашы мүмкүн.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': '{count} мод үчүн аз; эстутум жетпей оюн кулашы мүмкүн.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Мод жок, мынчасы керексиз. Керегинен ашык эстутум таштанды жыйноочуну жайлатып, FPS түшүрөт.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '{count} мод үчүн керегинен ашык. Керегинен ашык эстутум таштанды жыйноочуну жайлатып, FPS түшүрөт.',
-  'Mod yok; bu ayar uygun.': 'Мод жок; бул жөндөө ылайык.',
-  '{count} mod için uygun.': '{count} мод үчүн ылайык.',
   '{size} GB yap': '{size} ГБ кылуу',
   'İstatistikler': 'Статистика',
   'Ne kadar ve ne zaman oynadığınız': 'Канча жана качан ойногонуңуз',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': 'Иш столу жарлыгы',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': 'Эки жолу чыкылдатканда launcher ачылып ушул профилди иштетет',
   'Masaüstüne ekle': 'Иш столуна кошуу',
-  'Kısayol oluşturuldu: {file}': 'Жарлык түзүлдү: {file}'
+  'Kısayol oluşturuldu: {file}': 'Жарлык түзүлдү: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': 'Бул профиль үчүн аз көрүнөт; эстутум жетпей оюн кулашы мүмкүн.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': 'Оюн өзүнө берилген эстутумдун баарын колдонду; бул жөндөө аз көрүнөт.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': 'Оюн акыркы сеанстарда {peak} ГБ колдонду; бул жөндөө ага жетпейт.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Бул профиль үчүн көп көрүнөт. Керегинен ашык эстутум таштанды жыйноочуну жайлатып, FPS түшүрөт.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Оюн акыркы сеанстарда эң көбү {peak} ГБ колдонду. Керегинен ашык эстутум таштанды жыйноочуну жайлатып, FPS түшүрөт.',
+  'Bu profil için uygun görünüyor.': 'Бул профиль үчүн ылайык көрүнөт.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': 'Оюн акыркы сеанстарда эң көбү {peak} ГБ колдонду; бул жөндөө ылайык.'
 }
 
 export default table

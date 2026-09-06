@@ -52,6 +52,7 @@ import { isNetworkFailure } from './network.ts'
 import { ICON_BACKGROUNDS, ICON_SYMBOLS, type IconRecipe } from '../shared/profileIcon'
 import { createAutomaticWorldBackups, listAutomaticWorldBackups, restoreAutomaticWorldBackup } from './worldBackups'
 import { listSessions, recordSession } from './playSessions'
+import { watchPeakMemory } from './processMemory'
 import { createProfileShortcut } from './shortcuts'
 import {
   cleanProfileStorage,
@@ -725,6 +726,16 @@ export function registerIpc(
     launchAborts.set(profileId, controller)
     const startedAt = Date.now()
     let terminal = false
+    /**
+     * Watches how much memory the game actually takes.
+     *
+     * What a profile needs cannot be read off its mod list — ninety-six small
+     * utility mods and ninety-six heavy ones are not the same pack, and nothing
+     * on disk says which is which. The running game does, so it is measured
+     * rather than guessed at, and the memory advice uses the measurement once
+     * there is one.
+     */
+    let memoryWatch: { stop: () => number | null } | null = null
 
     try {
       const session = await launch({
@@ -740,6 +751,8 @@ export function registerIpc(
             sessions.delete(profileId)
             launchAborts.delete(profileId)
             void flushPendingOptions(profileId)
+            const peakMb = memoryWatch?.stop() ?? null
+            memoryWatch = null
             const current = store.profile(profileId)
             if (current) {
               const endedAt = Date.now()
@@ -748,7 +761,7 @@ export function registerIpc(
               })
               // The running total cannot say when any of it happened. The
               // session list can, and it is what the statistics are drawn from.
-              void recordSession(current, startedAt, endedAt).catch(() => undefined)
+              void recordSession(current, startedAt, endedAt, peakMb).catch(() => undefined)
             }
             finishDiagnostics(state)
           }
@@ -761,6 +774,7 @@ export function registerIpc(
       })
 
       if (!terminal) sessions.set(profileId, session)
+      if (!terminal && session.pid !== undefined) memoryWatch = watchPeakMemory(session.pid)
       store.updateProfile(profileId, { lastPlayed: Date.now() })
       return { pid: session.pid }
     } catch (error) {

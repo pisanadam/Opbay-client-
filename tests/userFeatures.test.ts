@@ -483,7 +483,9 @@ test('play sessions are recorded and can be summarised', () => {
   const ipc = readFileSync('src/main/ipc.ts', 'utf8')
   // Written where the running total is, from the same pair of timestamps.
   assert.match(ipc, /totalPlaytimeMs: current\.totalPlaytimeMs \+ \(endedAt - startedAt\)/)
-  assert.match(ipc, /void recordSession\(current, startedAt, endedAt\)/)
+  // The peak goes with it: a session's memory is only readable next to the
+  // limit it ran under.
+  assert.match(ipc, /void recordSession\(current, startedAt, endedAt, peakMb\)/)
   // One unreadable profile folder must not empty the whole page.
   assert.match(ipc, /sessions: await listSessions\(profile\)\.catch\(\(\) => \[\]\)/)
 
@@ -530,4 +532,31 @@ test('a profile can be started from a desktop shortcut', () => {
   // player is already looking.
   const effect = app.slice(app.indexOf('if (!launchRequest) return'))
   assert.ok(effect.indexOf('setRoute(') < effect.indexOf('api.game.launch'))
+})
+
+/**
+ * A mod count cannot tell ninety-six small tweaks from ninety-six heavy content
+ * mods, and the memory each wants is not the same. The running game knows, so
+ * it is measured instead of guessed at.
+ */
+test('memory advice is measured from the game, not counted off the mod list', () => {
+  const advice = readFileSync('src/shared/memoryAdvice.ts', 'utf8')
+  // Never a count. The fallback is weight on disk, and it says it is a guess.
+  assert.doesNotMatch(advice, /modCount/)
+  assert.match(advice, /function fromDiskSize\(modBytes: number\)/)
+  assert.match(advice, /basis: 'measured' \| 'estimated'/)
+  // A peak pressed against its limit says "at least this much", never "enough".
+  assert.match(advice, /session\.peakMb < session\.capMb \* PRESSED/)
+  assert.match(advice, /Math\.max\(estimate, toStep\(highestCap \+ 1024\)\)/)
+
+  const ipc = readFileSync('src/main/ipc.ts', 'utf8')
+  assert.match(ipc, /memoryWatch = watchPeakMemory\(session\.pid\)/)
+
+  const sessions = readFileSync('src/main/playSessions.ts', 'utf8')
+  // Both numbers or neither.
+  assert.match(sessions, /session\.peakMb = peakMb\s*\n\s*\/\/[\s\S]*?\n\s*session\.capMb = profile\.memoryMb/)
+
+  const detail = readFileSync('src/renderer/pages/ProfileDetail.tsx', 'utf8')
+  assert.match(detail, /entry\.category === 'mods'/)
+  assert.match(detail, /session\.peakMb && session\.capMb \?/)
 })

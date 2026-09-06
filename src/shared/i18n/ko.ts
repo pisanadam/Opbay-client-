@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': '맨 위에 고정',
   'Sabitlemeyi kaldır': '고정 해제',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': '이 컴퓨터의 메모리는 {total} GB입니다. 그만큼 게임에 주면 시스템에 남는 양이 모자랍니다.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': '이 버전에는 적습니다. 메모리가 모자라 게임이 튕길 수 있습니다.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': '모드 {count}개에는 적습니다. 메모리가 모자라 게임이 튕길 수 있습니다.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '모드가 없어 이만큼은 필요 없습니다. 필요 이상의 메모리는 가비지 컬렉터를 느리게 하고 FPS를 떨어뜨립니다.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '모드 {count}개에 필요한 양보다 많습니다. 필요 이상의 메모리는 가비지 컬렉터를 느리게 하고 FPS를 떨어뜨립니다.',
-  'Mod yok; bu ayar uygun.': '모드 없음. 이 설정이면 됩니다.',
-  '{count} mod için uygun.': '모드 {count}개에 알맞습니다.',
   '{size} GB yap': '{size} GB로 설정',
   'İstatistikler': '통계',
   'Ne kadar ve ne zaman oynadığınız': '얼마나, 언제 플레이했는지',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': '바탕화면 바로 가기',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': '두 번 누르면 런처가 열리고 이 프로필이 실행됩니다',
   'Masaüstüne ekle': '바탕화면에 추가',
-  'Kısayol oluşturuldu: {file}': '바로 가기를 만들었습니다: {file}'
+  'Kısayol oluşturuldu: {file}': '바로 가기를 만들었습니다: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': '이 프로필에는 적어 보입니다. 메모리가 모자라 게임이 튕길 수 있습니다.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': '게임이 받은 메모리를 전부 썼습니다. 이 설정은 적어 보입니다.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': '최근 실행에서 게임이 {peak} GB를 썼습니다. 이 설정으로는 모자랍니다.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '이 프로필에는 많아 보입니다. 필요 이상의 메모리는 가비지 컬렉터를 느리게 하고 FPS를 떨어뜨립니다.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '최근 실행에서 게임이 쓴 최대치는 {peak} GB입니다. 필요 이상의 메모리는 가비지 컬렉터를 느리게 하고 FPS를 떨어뜨립니다.',
+  'Bu profil için uygun görünüyor.': '이 프로필에는 알맞아 보입니다.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': '최근 실행에서 게임이 쓴 최대치는 {peak} GB입니다. 이 설정이면 됩니다.'
 }
 
 export default table

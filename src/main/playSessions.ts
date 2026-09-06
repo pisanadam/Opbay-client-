@@ -59,13 +59,25 @@ export async function listSessions(profile: Profile): Promise<PlaySession[]> {
  * process that lived for a second, and a chart full of those says the game was
  * played every day it crashed.
  */
-export async function recordSession(profile: Profile, startedAt: number, endedAt: number): Promise<void> {
+export async function recordSession(
+  profile: Profile,
+  startedAt: number,
+  endedAt: number,
+  /** The most memory the game held during it, when it could be measured. */
+  peakMb: number | null = null
+): Promise<void> {
   const ms = endedAt - startedAt
   if (!Number.isFinite(ms) || ms < MIN_SESSION_MS) return
 
   const file = sessionsFile(profile)
   const history = await listSessions(profile)
-  const next = [...history, { at: startedAt, ms }].slice(-MAX_SESSIONS)
+  const session: PlaySession = { at: startedAt, ms }
+  if (peakMb !== null && Number.isFinite(peakMb) && peakMb > 0) {
+    session.peakMb = peakMb
+    // Without the limit it ran under, the peak cannot be read: see PlaySession.
+    session.capMb = profile.memoryMb
+  }
+  const next = [...history, session].slice(-MAX_SESSIONS)
 
   await fsp.mkdir(path.dirname(file), { recursive: true })
   const temporary = `${file}.tmp`

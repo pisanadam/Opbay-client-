@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': 'Закрепить наверху',
   'Sabitlemeyi kaldır': 'Открепить',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': 'На этой машине {total} ГБ; отдав столько игре, системе не остаётся достаточно.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': 'Мало для этой версии — игре может не хватить памяти.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': 'Мало для {count} модов — игре может не хватить памяти.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Модов нет, столько памяти ни к чему. Лишняя память замедляет сборщик мусора и снижает FPS.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Больше, чем нужно для {count} модов. Лишняя память замедляет сборщик мусора и снижает FPS.',
-  'Mod yok; bu ayar uygun.': 'Модов нет, настройка подходит.',
-  '{count} mod için uygun.': 'В самый раз для {count} модов.',
   '{size} GB yap': 'Поставить {size} ГБ',
   'İstatistikler': 'Статистика',
   'Ne kadar ve ne zaman oynadığınız': 'Сколько и когда вы играете',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': 'Ярлык на рабочем столе',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': 'Двойной щелчок открывает лаунчер и запускает этот профиль',
   'Masaüstüne ekle': 'Добавить на рабочий стол',
-  'Kısayol oluşturuldu: {file}': 'Ярлык создан: {file}'
+  'Kısayol oluşturuldu: {file}': 'Ярлык создан: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': 'Похоже, мало для этого профиля — игре может не хватить памяти.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': 'Игра израсходовала всю выданную память; настройка выглядит малой.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': 'В последних сессиях игра использовала {peak} ГБ — этой настройки ей не хватает.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Похоже, много для этого профиля. Лишняя память замедляет сборщик мусора и снижает FPS.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'В последних сессиях игра использовала не больше {peak} ГБ. Лишняя память замедляет сборщик мусора и снижает FPS.',
+  'Bu profil için uygun görünüyor.': 'Для этого профиля выглядит подходящим.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': 'В последних сессиях игра использовала не больше {peak} ГБ; настройка подходит.'
 }
 
 export default table

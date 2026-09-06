@@ -688,12 +688,6 @@ const table: Dictionary = {
   'Yukarıda sabitle': 'Жоғарыда бекіту',
   'Sabitlemeyi kaldır': 'Бекітуді алу',
   'Bu makinede {total} GB var; bu kadarını oyuna verince sisteme yetecek kadarı kalmıyor.': 'Бұл компьютерде {total} ГБ бар; сонша мөлшерді ойынға берсеңіз жүйеге жететіні қалмайды.',
-  'Bu sürüm için az; oyun bellek yetmediği için çökebilir.': 'Бұл нұсқа үшін аз; жады жетпей ойын құлауы мүмкін.',
-  '{count} mod için az; oyun bellek yetmediği için çökebilir.': '{count} мод үшін аз; жады жетпей ойын құлауы мүмкін.',
-  'Mod yok; bu kadarı gereksiz. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Мод жоқ, бұлай көп қажет емес. Қажеттен артық жады қоқыс жинағышты баяулатып, FPS түсіреді.',
-  '{count} mod için fazla. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': '{count} мод үшін қажеттен көп. Қажеттен артық жады қоқыс жинағышты баяулатып, FPS түсіреді.',
-  'Mod yok; bu ayar uygun.': 'Мод жоқ; бұл баптау қолайлы.',
-  '{count} mod için uygun.': '{count} мод үшін қолайлы.',
   '{size} GB yap': '{size} ГБ қылу',
   'İstatistikler': 'Статистика',
   'Ne kadar ve ne zaman oynadığınız': 'Қанша және қашан ойнағаныңыз',
@@ -716,7 +710,14 @@ const table: Dictionary = {
   'Masaüstü kısayolu': 'Жұмыс үстелі таңбашасы',
   'Çift tıklayınca launcher açılıp doğrudan bu profili başlatır': 'Екі рет шертсеңіз launcher ашылып осы профильді іске қосады',
   'Masaüstüne ekle': 'Жұмыс үстеліне қосу',
-  'Kısayol oluşturuldu: {file}': 'Таңбаша жасалды: {file}'
+  'Kısayol oluşturuldu: {file}': 'Таңбаша жасалды: {file}',
+  'Bu profil için az görünüyor; oyun bellek yetmediği için çökebilir.': 'Бұл профиль үшін аз көрінеді; жады жетпей ойын құлауы мүмкін.',
+  'Oyun kendisine verilen belleğin tamamını kullandı; bu ayar az görünüyor.': 'Ойын өзіне берілген жадының бәрін пайдаланды; бұл баптау аз көрінеді.',
+  'Oyun son oturumlarda {peak} GB kullandı; bu ayar ona yetmiyor.': 'Ойын соңғы сеанстарда {peak} ГБ пайдаланды; бұл баптау оған жетпейді.',
+  'Bu profil için fazla görünüyor. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Бұл профиль үшін көп көрінеді. Қажеттен артық жады қоқыс жинағышты баяулатып, FPS түсіреді.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı. Gereğinden büyük bellek çöp toplayıcıyı yavaşlatır, FPS düşer.': 'Ойын соңғы сеанстарда ең көбі {peak} ГБ пайдаланды. Қажеттен артық жады қоқыс жинағышты баяулатып, FPS түсіреді.',
+  'Bu profil için uygun görünüyor.': 'Бұл профиль үшін қолайлы көрінеді.',
+  'Oyun son oturumlarda en fazla {peak} GB kullandı; bu ayar uygun.': 'Ойын соңғы сеанстарда ең көбі {peak} ГБ пайдаланды; бұл баптау қолайлы.'
 }
 
 export default table
